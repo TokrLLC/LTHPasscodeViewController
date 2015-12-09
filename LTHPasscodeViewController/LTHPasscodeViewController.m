@@ -1154,7 +1154,15 @@ options:NSNumericSearch] != NSOrderedAscending)
     }
     // App launch/Turning passcode off: Passcode OK -> dismiss, Passcode incorrect -> deny access.
     else {
-        if ([typedString isEqualToString: savedPasscode]) {
+        BOOL isSuccessfullyValidated = NO;
+        
+        if ([self.delegate respondsToSelector: @selector(passcodeWasEnteredAndNeedsValidation)]) {
+            isSuccessfullyValidated = [self.delegate performSelector: @selector(passcodeWasEnteredAndNeedsValidation)];
+        } else {
+            isSuccessfullyValidated = [typedString isEqualToString: savedPasscode];
+        }
+        
+        if (isSuccessfullyValidated) {
 // Or, if you prefer by notifications:
 //            [[NSNotificationCenter defaultCenter] postNotificationName: @"passcodeWasEnteredSuccessfully"
 //                                                                object: self

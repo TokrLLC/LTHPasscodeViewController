@@ -19,6 +19,11 @@
  */
 - (void)maxNumberOfFailedAttemptsReached;
 /**
+ @brief Called when the passcode was entered and needs validation.
+ @details Substitutes original passcode validation functionality.
+ */
+- (BOOL)passcodeWasEnteredAndNeedsValidation;
+/**
  @brief Called when the passcode was entered successfully.
  */
 - (void)passcodeWasEnteredSuccessfully;
